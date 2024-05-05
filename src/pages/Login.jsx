@@ -13,7 +13,7 @@ export const action =
     const data = Object.fromEntries(formData);
     try {
       const response = await customFetch.post('/auth/local', data);
-
+      console.log(response.data);
       store.dispatch(loginUser(response.data));
       toast.success('logged in successfully');
       return redirect('/');
@@ -32,21 +32,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const loginAsGuestUser = async () => {
-    try {
-      const resp = await customFetch.post('/auth/local', {
-        identifier: 'test@test.com',
-        password: 'secret',
-      });
-      dispatch(loginUser(resp.data));
-      toast.success('logged in successfully');
-      navigate('/');
-    } catch (error) {
-      console.log(error);
-      toast.error('Guest user login error, Please try again');
-    }
-  };
-
   return (
     <section className="h-screen grid place-items-center">
       <Form
@@ -60,13 +45,7 @@ const Login = () => {
         <div className="mt-4">
           <SubmitBtn text="login" />
         </div>
-        <button
-          type="submit"
-          className="btn btn-secondary btn-block"
-          onClick={loginAsGuestUser}
-        >
-          guest user
-        </button>
+
         <p className="text-center">
           Not a member yet?{' '}
           <Link

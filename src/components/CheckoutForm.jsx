@@ -24,12 +24,19 @@ export const action =
       cartItems,
       numItemsInCart,
     };
-
+    console.log(info);
     store.dispatch(addItem(info));
     try {
       const resp = await customFetch.post(
         '/orders',
-        { data: info },
+        {
+          name: name,
+          address: address,
+          chargeTotal: (orderTotal / 1).toFixed(2),
+          orderTotal: formatPrice(orderTotal),
+          cartItems: cartItems,
+          numItemsInCart: numItemsInCart,
+        },
         {
           headers: {
             Authorization: `Bearer ${user.token}`,

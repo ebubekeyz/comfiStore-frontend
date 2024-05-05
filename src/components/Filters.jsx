@@ -24,7 +24,7 @@ const Filters = () => {
       <FormSelect
         label="select category"
         name="category"
-        list={meta.companies}
+        list={meta.categories}
         size="select-sm"
         defaultValue={category}
       />
