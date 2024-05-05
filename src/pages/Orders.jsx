@@ -35,7 +35,7 @@ export const loader =
 
     try {
       const resp = await queryClient.ensureQueryData(ordersQuery(params, user));
-      const orders = resp.data.data;
+      const orders = resp.data.order;
       const meta = resp.data.meta;
       return { orders, meta };
     } catch (error) {

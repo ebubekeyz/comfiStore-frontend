@@ -34,7 +34,7 @@ export const action = async ({ request }) => {
 
 const PaystackIntegration = () => {
   const order = useSelector((state) => state.orderState.orderItems);
-  const { email } = useSelector((state) => state.userState.user);
+  const { identifier } = useSelector((state) => state.userState.user);
 
   return (
     <div className="h-screen grid place-items-center text-3xl">
@@ -47,7 +47,7 @@ const PaystackIntegration = () => {
           label="email"
           name="email"
           type="email"
-          defaultValue={email}
+          defaultValue={identifier}
         />
         <FormInput
           label="first name"
