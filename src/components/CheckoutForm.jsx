@@ -19,7 +19,7 @@ export const action =
     const info = {
       name,
       address,
-      chargeTotal: (orderTotal / 100).toFixed(2),
+      chargeTotal: (orderTotal / 1).toFixed(2),
       orderTotal: formatPrice(orderTotal),
       cartItems,
       numItemsInCart,

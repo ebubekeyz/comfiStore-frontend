@@ -11,12 +11,19 @@ export const customFetch = axios.create({
 });
 
 export const formatPrice = (price) => {
-  const dollarAmount = new Intl.NumberFormat('en-US', {
+  const dollarAmount = new Intl.NumberFormat('en-NG', {
     style: 'currency',
-    currency: 'USD',
-  }).format((price / 100).toFixed(2));
+    currency: 'NGN',
+  }).format((price / 1).toFixed(2));
   return dollarAmount;
 };
+// export const formatPrice = (price) => {
+//   const dollarAmount = new Intl.NumberFormat('en-NG', {
+//     style: 'currency',
+//     currency: 'NG',
+//   }).format((price / 100).toFixed(2));
+//   return dollarAmount;
+// };
 
 export const generateAmountOptions = (number) => {
   return Array.from({ length: number }, (_, index) => {
