@@ -4,6 +4,8 @@ import SubmitBtn from './SubmitBtn';
 import { customFetch, formatPrice } from '../utils';
 import { toast } from 'react-toastify';
 import { clearCart } from '../features/cart/cartSlice';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../features/order/orderSlice';
 
 export const action =
   (store, queryClient) =>
@@ -17,11 +19,13 @@ export const action =
     const info = {
       name,
       address,
-      chargeTotal: orderTotal,
+      chargeTotal: (orderTotal / 100).toFixed(2),
       orderTotal: formatPrice(orderTotal),
       cartItems,
       numItemsInCart,
     };
+
+    store.dispatch(addItem(info));
     try {
       const resp = await customFetch.post(
         '/orders',
@@ -32,10 +36,11 @@ export const action =
           },
         }
       );
+
       queryClient.removeQueries(['orders']);
       store.dispatch(clearCart());
-      toast.success('order placed successfully');
-      return redirect('/orders');
+      toast.success('order placed successfully, please make payment');
+      return redirect('/paystack');
     } catch (error) {
       const errorMessage =
         error?.resp?.data?.error?.message ||

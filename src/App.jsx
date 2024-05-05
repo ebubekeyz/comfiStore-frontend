@@ -14,22 +14,25 @@ import {
   Login,
   Checkout,
   Orders,
+  Paystack,
 } from './pages';
 
-import { ErrorElement } from './components';
 // loaders
 import { loader as landingLoader } from './pages/Landing';
 import { loader as singlePageLoader } from './pages/SingleProduct';
 import { loader as productsLoader } from './pages/Products';
 import { loader as checkoutLoader } from './pages/Checkout';
 import { loader as orderLoader } from './pages/Orders';
+import { loader as paystackLoader } from './pages/Paystack';
 // actions
+import { action as paystackAction } from './components/PaystackIntegration';
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
 // you dont always have to set ur action in the actual page. it can also be set in the component
 import { action as checkoutAction } from './components/CheckoutForm';
 
 import { store } from './store';
+import { ErrorElement } from './components';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -80,6 +83,12 @@ const router = createBrowserRouter([
         loader: orderLoader(store, queryClient),
       },
     ],
+  },
+  {
+    path: 'paystack',
+    element: <Paystack />,
+    loader: paystackLoader(store),
+    action: paystackAction,
   },
   {
     path: '/login',
