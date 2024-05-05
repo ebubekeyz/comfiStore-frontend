@@ -66,11 +66,33 @@ const SingleProduct = () => {
       {/* PRODUCT */}
       <div className="mt-6 grid gap-y-8 lg:grid-cols-2 lg:gap-x-16">
         {/* IMAGE */}
-        <img
-          src={image}
-          alt={title}
-          className="w-96 h-96 object-cover rounded-lg lg:w-full"
-        />
+        <button
+          className="btn"
+          onClick={() => document.getElementById('my_modal_1').showModal()}
+        >
+          <img
+            src={image}
+            alt={title}
+            className="w-96 h-96 object-cover rounded-lg lg:w-full"
+          />
+        </button>
+
+        <dialog id="my_modal_1" className="modal">
+          <div className="modal-box">
+            <img
+              src={image}
+              alt={title}
+              className="w-96 h-96 object-contain rounded-lg lg:w-full"
+            />
+            <div className="modal-action">
+              <form method="dialog">
+                {/* if there is a button in form, it will close the modal */}
+                <button className="btn">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+
         {/* PRODUCT */}
         <div>
           <h1 className="capitalize text-3xl font-bold">{title}</h1>

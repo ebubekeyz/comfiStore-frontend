@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
-import hero1 from '../assets/hero1.webp';
-import hero2 from '../assets/hero2.webp';
-import hero3 from '../assets/hero3.webp';
-import hero4 from '../assets/hero4.webp';
+import hero1 from '../assets/gown1.jpg';
+import hero2 from '../assets/ring1.jpg';
+import hero3 from '../assets/necklace1.jpg';
+import hero4 from '../assets/gown2.jpg';
 
 const carouselImages = [hero1, hero2, hero3, hero4];
 

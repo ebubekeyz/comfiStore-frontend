@@ -13,10 +13,17 @@ export const action =
     const data = Object.fromEntries(formData);
     try {
       const response = await customFetch.post('/auth/local', data);
-      console.log(response.data);
+      console.log(response.data.user.role);
       store.dispatch(loginUser(response.data));
       toast.success('logged in successfully');
-      return redirect('/');
+      if (
+        response.data.user.role === 'admin' ||
+        response.data.user.role === 'owner'
+      ) {
+        return redirect('/dashboard');
+      } else {
+        return redirect('/');
+      }
     } catch (error) {
       console.log(error);
       const errorMessage =

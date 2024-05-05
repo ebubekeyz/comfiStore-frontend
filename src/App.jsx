@@ -16,8 +16,18 @@ import {
   Orders,
   Paystack,
 } from './pages';
+import {
+  HomeLayout as HomeLayout2,
+  Landing as Landing2,
+  Orders as Orders2,
+  AddProducts,
+  Error as Error2,
+  Users,
+} from './dashboard pages';
 
 // loaders
+import { loader as orderLoader2 } from './dashboard pages/Orders';
+import { loader as userLoader2 } from './dashboard pages/Users';
 import { loader as landingLoader } from './pages/Landing';
 import { loader as singlePageLoader } from './pages/SingleProduct';
 import { loader as productsLoader } from './pages/Products';
@@ -84,6 +94,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: 'paystack',
     element: <Paystack />,
@@ -101,6 +112,39 @@ const router = createBrowserRouter([
     element: <Register />,
     errorElement: <Error />,
     action: registerAction,
+  },
+
+  {
+    path: '/dashboard',
+    element: <HomeLayout2 />,
+    errorElement: <Error2 />,
+    children: [
+      {
+        index: true,
+        element: <Landing2 />,
+        loader: landingLoader,
+      },
+      {
+        path: '/dashboard/orders',
+        element: <Orders2 />,
+        loader: orderLoader2(store, queryClient),
+      },
+      {
+        path: '/dashboard/addProducts',
+        element: <AddProducts />,
+      },
+      {
+        path: '/dashboard/users',
+        element: <Users />,
+        loader: userLoader2(store, queryClient),
+      },
+      {
+        path: '/dashboard/products',
+        element: <Products />,
+        errorElement: <ErrorElement />,
+        loader: productsLoader(queryClient),
+      },
+    ],
   },
 ]);
 

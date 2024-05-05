@@ -55,7 +55,8 @@ const cartSlice = createSlice({
       toast.success('Cart updated');
     },
     calculateTotals: (state) => {
-      state.tax = 0.1 * state.cartTotal;
+      // state.tax = 0.1 * state.cartTotal;
+      state.tax = 0;
       state.orderTotal = state.cartTotal + state.shipping + state.tax;
       localStorage.setItem('cart', JSON.stringify(state));
     },
