@@ -1,10 +1,14 @@
 import { useLoaderData } from 'react-router-dom';
 import day from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
+import SectionTitle from './SectionTitle';
 day.extend(advancedFormat);
 
 const OrdersList = () => {
   const { meta, orders } = useLoaderData();
+  if (orders.length === 0) {
+    <SectionTitle text="No Order" />;
+  }
   return (
     <div className="mt-8">
       <h4 className="mb-4 capitalize">

@@ -23,18 +23,23 @@ import {
   AddProducts,
   Error as Error2,
   Users,
+  NewOrderRequest,
 } from './dashboard pages';
 
 // loaders
+import { loader as homeLoader } from './dashboard pages/HomeLayout';
 import { loader as orderLoader2 } from './dashboard pages/Orders';
+import { loader as orderLoader3 } from './dashboard pages/NewOrderRequest';
 import { loader as userLoader2 } from './dashboard pages/Users';
 import { loader as landingLoader } from './pages/Landing';
+import { loader as landingLoader2 } from './dashboard pages/Landing';
 import { loader as singlePageLoader } from './pages/SingleProduct';
 import { loader as productsLoader } from './pages/Products';
 import { loader as checkoutLoader } from './pages/Checkout';
 import { loader as orderLoader } from './pages/Orders';
 import { loader as paystackLoader } from './pages/Paystack';
 // actions
+import { action as orderAction } from './dashboard component/NewOrderList';
 import { action as paystackAction } from './components/PaystackIntegration';
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
@@ -118,16 +123,17 @@ const router = createBrowserRouter([
     path: '/dashboard',
     element: <HomeLayout2 />,
     errorElement: <Error2 />,
+    loader: homeLoader(store),
     children: [
       {
         index: true,
         element: <Landing2 />,
-        loader: landingLoader,
+        loader: landingLoader2(store),
       },
       {
         path: '/dashboard/orders',
         element: <Orders2 />,
-        loader: orderLoader2(store, queryClient),
+        loader: orderLoader2(store),
       },
       {
         path: '/dashboard/addProducts',
@@ -143,6 +149,13 @@ const router = createBrowserRouter([
         element: <Products />,
         errorElement: <ErrorElement />,
         loader: productsLoader(queryClient),
+      },
+      {
+        path: '/dashboard/newOrder',
+        element: <NewOrderRequest />,
+        errorElement: <ErrorElement />,
+        loader: orderLoader3(store),
+        action: orderAction(store),
       },
     ],
   },

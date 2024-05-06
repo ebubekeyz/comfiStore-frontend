@@ -5,3 +5,4 @@ export { default as ComplexPaginationContainer } from './ComplexPaginationContai
 export { default as SectionTitle } from './SectionTitle';
 export { default as OrdersList } from './OrdersList';
 export { default as UsersList } from './UsersList';
+export { default as NewOrderList } from './NewOrderList';

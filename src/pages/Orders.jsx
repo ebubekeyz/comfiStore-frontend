@@ -9,7 +9,7 @@ import {
 
 const ordersQuery = (params, user) => {
   return {
-    queryKey: ['order', user.username, params.page ? parseInt(params.page) : 1],
+    queryKey: ['order', user.name, params.page ? parseInt(params.page) : 1],
     queryFn: () =>
       customFetch.get('/orders', {
         params,

@@ -3,7 +3,7 @@ import { redirect, useLoaderData } from 'react-router-dom';
 import { customFetch } from '../utils';
 import {
   ComplexPaginationContainer,
-  OrdersList,
+  NewOrderList,
   SectionTitle,
 } from '../dashboard component';
 
@@ -11,7 +11,7 @@ import {
 //   return {
 //     queryKey: ['order', user.name, params.page ? parseInt(params.page) : 1],
 //     queryFn: () =>
-//       customFetch.get('/orders/allOrders?sort=latest', {
+//       customFetch.get('/orders/allOrders?status=pending', {
 //         params,
 //       }),
 //   };
@@ -31,7 +31,7 @@ export const loader =
     ]);
 
     try {
-      const resp = await customFetch.get('/orders/allOrders?sort=latest', {
+      const resp = await customFetch.get('/orders/allOrders?status=pending', {
         params,
       });
       const orders = resp.data.order;
@@ -49,17 +49,17 @@ export const loader =
     }
   };
 
-const Orders = () => {
+const NewOrderRequest = () => {
   const { meta } = useLoaderData();
   if (meta.pagination.total < 1) {
     return <SectionTitle text="please make an order" />;
   }
   return (
     <>
-      <SectionTitle text="Your orders" />
-      <OrdersList />
+      <SectionTitle text="New Order" />
+      <NewOrderList />
       <ComplexPaginationContainer />
     </>
   );
 };
-export default Orders;
+export default NewOrderRequest;

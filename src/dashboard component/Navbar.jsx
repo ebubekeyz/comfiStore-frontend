@@ -1,12 +1,14 @@
 import { BsBell, BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { FaBarsStaggered } from 'react-icons/fa6';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLoaderData } from 'react-router-dom';
 import NavLinks from './NavLinks';
 import { useDispatch } from 'react-redux';
 import { toggleTheme } from '../features/user/userSlice';
 import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+  const { orders } = useLoaderData();
+
   const dispatch = useDispatch();
 
   const handleTheme = () => {
@@ -58,13 +60,13 @@ const Navbar = () => {
           </label>
           {/* CART LINK */}
           <NavLink
-            to="/orders"
+            to="/dashboard/newOrder"
             className="btn btn-ghost btn-circle btn-md ml-4"
           >
             <div className="indicator">
               <BsBell className="h6 w-6" />
               <span className="badge badge-sm badge-primary indicator-item">
-                {numItemsInCart}
+                {orders ? <div>{orders.length}</div> : ''}
               </span>
             </div>
           </NavLink>
