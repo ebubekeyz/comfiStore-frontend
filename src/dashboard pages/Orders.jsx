@@ -22,7 +22,7 @@ export const loader =
   async ({ request }) => {
     const user = store.getState().userState.user;
 
-    if (!user) {
+    if ((!user && user.role !== 'admin') || user.role !== 'owner') {
       toast.warn('You must be logged in to view this page');
       return redirect('/login');
     }
