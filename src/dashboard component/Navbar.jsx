@@ -13,7 +13,9 @@ const Navbar = () => {
     dispatch(toggleTheme());
   };
 
-  const numItemsInCart = useSelector((store) => store.cartState.numItemsInCart);
+  const numItemsInCart = useSelector(
+    (store) => store.orderState.numItemsInCart
+  );
   const user = useSelector((store) => store.userState.user);
   return (
     <nav className="bg-base-200">
@@ -62,7 +64,7 @@ const Navbar = () => {
             <div className="indicator">
               <BsBell className="h6 w-6" />
               <span className="badge badge-sm badge-primary indicator-item">
-                1
+                {numItemsInCart}
               </span>
             </div>
           </NavLink>

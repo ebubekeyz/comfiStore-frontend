@@ -7,6 +7,7 @@ const getOrderFromLocalStorage = () => {
 
 const initialState = {
   orderItems: getOrderFromLocalStorage(),
+  numItemsInCart: 'New Order',
 };
 
 const orderSlice = createSlice({

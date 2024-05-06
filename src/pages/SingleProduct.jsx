@@ -67,7 +67,6 @@ const SingleProduct = () => {
       <div className="mt-6 grid gap-y-8 lg:grid-cols-2 lg:gap-x-16">
         {/* IMAGE */}
         <button
-          className="btn"
           onClick={() => document.getElementById('my_modal_1').showModal()}
         >
           <img

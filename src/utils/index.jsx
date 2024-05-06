@@ -5,7 +5,7 @@ import axios from 'axios';
 // const { token } = bearerToken;
 
 // const productionUrl = 'https://strapi-store-server.onrender.com/api';
-const productionUrl = 'https://comfi-server-api.onrender.com/api';
+const productionUrl = 'http://localhost:4000/api';
 
 export const customFetch = axios.create({
   baseURL: productionUrl,

@@ -54,7 +54,7 @@ const Users = () => {
   }
   return (
     <>
-      <SectionTitle text="Your orders" />
+      <SectionTitle text="Users" />
       <UsersList />
       <ComplexPaginationContainer />
     </>
