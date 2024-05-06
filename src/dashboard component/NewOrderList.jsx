@@ -72,7 +72,7 @@ const NewOrderList = () => {
               <th>Products</th>
               <th>Cost</th>
               <th className="hidden sm:block">Date</th>
-              <th>confirm</th>
+              <th>Confirm</th>
             </tr>
           </thead>
 

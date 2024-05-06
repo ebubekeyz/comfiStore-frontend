@@ -27,6 +27,7 @@ import {
 } from './dashboard pages';
 
 // loaders
+import { loader as addProductLoader } from './dashboard pages/AddProducts';
 import { loader as homeLoader } from './dashboard pages/HomeLayout';
 import { loader as orderLoader2 } from './dashboard pages/Orders';
 import { loader as orderLoader3 } from './dashboard pages/NewOrderRequest';
@@ -138,6 +139,7 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/addProducts',
         element: <AddProducts />,
+        loader: addProductLoader(store),
       },
       {
         path: '/dashboard/users',

@@ -3,6 +3,7 @@ import { redirect, useLoaderData } from 'react-router-dom';
 import { customFetch } from '../utils';
 import {
   ComplexPaginationContainer,
+  Filters,
   OrdersList,
   SectionTitle,
 } from '../dashboard component';
@@ -37,7 +38,7 @@ export const loader =
       const orders = resp.data.order;
 
       const meta = resp.data.meta;
-      return { orders, meta };
+      return { orders, meta, params };
     } catch (error) {
       const errorMessage =
         error?.resp?.data?.error?.message ||
@@ -57,6 +58,7 @@ const Orders = () => {
   return (
     <>
       <SectionTitle text="Your orders" />
+      <Filters />
       <OrdersList />
       <ComplexPaginationContainer />
     </>

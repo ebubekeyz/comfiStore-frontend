@@ -24,6 +24,7 @@ const OrdersList = () => {
               <th>Products</th>
               <th>Cost</th>
               <th className="hidden sm:block">Date</th>
+              <th>Status</th>
             </tr>
           </thead>
 
@@ -36,6 +37,7 @@ const OrdersList = () => {
                 numItemsInCart,
                 orderTotal,
                 createdAt,
+                status,
               } = order;
               const date = day(createdAt).format('hh:mm a - MMM Do, YYYY');
               return (
@@ -45,6 +47,7 @@ const OrdersList = () => {
                   <td>{numItemsInCart}</td>
                   <td>{orderTotal}</td>
                   <td className="hidden sm:block">{date}</td>
+                  <td>{status}</td>
                 </tr>
               );
             })}

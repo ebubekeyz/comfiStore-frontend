@@ -21,21 +21,35 @@ const Filters = () => {
         defaultValue={search}
       />
       {/* CATEGORIES */}
-      <FormSelect
+      <FormInput
+        type="search"
+        label="select category"
+        name="category"
+        size="input-sm"
+        defaultValue={category}
+      />
+      {/* <FormSelect
         label="select category"
         name="category"
         list={meta.categories}
         size="select-sm"
         defaultValue={category}
-      />
+      /> */}
       {/* COMPANIES */}
-      <FormSelect
+      <FormInput
+        type="search"
+        label="select company"
+        name="company"
+        size="input-sm"
+        defaultValue={company}
+      />
+      {/* <FormSelect
         label="select company"
         name="company"
         list={meta.companies}
         size="select-sm"
         defaultValue={company}
-      />
+      /> */}
       {/* ORDER */}
       <FormSelect
         label="sort by"
