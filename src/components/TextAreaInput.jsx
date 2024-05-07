@@ -1,4 +1,4 @@
-const TextAreaInput = ({ label, name }) => {
+const TextAreaInput = ({ label, name, id, text }) => {
   return (
     <>
       <label className="form-control">
@@ -6,9 +6,12 @@ const TextAreaInput = ({ label, name }) => {
           <span className="label-text">{label}</span>
         </div>
         <textarea
+          id={id}
           className="textarea textarea-bordered h-32"
           name={name}
-        ></textarea>
+        >
+          {text}
+        </textarea>
         <div className="label"></div>
       </label>
     </>

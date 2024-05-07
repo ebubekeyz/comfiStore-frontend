@@ -43,7 +43,7 @@ const AddProductForm = () => {
       <FormSelect
         label="company"
         name="company"
-        list={['Italian', 'Adidas']}
+        list={['', 'Italian', 'Adidas']}
         size="select-md"
       />
 
@@ -52,14 +52,14 @@ const AddProductForm = () => {
       <FormSelect
         label="featured"
         name="featured"
-        list={['true', 'false']}
+        list={['', 'true', 'false']}
         size="select-md"
       />
 
       <FormSelect
         label="category"
         name="category"
-        list={['wedding dress', 'bridal wedding dress']}
+        list={['', 'wedding dress', 'bridal wedding dress']}
         size="select-md"
       />
 

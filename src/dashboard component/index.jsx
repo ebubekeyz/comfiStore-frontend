@@ -10,3 +10,7 @@ export { default as Filters } from './Filters';
 export { default as BreadCrumb } from './BreadCrumb';
 export { default as AddProduct } from './AddProduct';
 export { default as AddProductForm } from './AddProductForm';
+export { default as PaginationContainer } from './PaginationContainer';
+export { default as ProductsContainer } from './ProductsContainer';
+export { default as EditProduct } from './EditProduct';
+export { default as EditProductForm } from './EditProductForm';

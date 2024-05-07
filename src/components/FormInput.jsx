@@ -1,4 +1,4 @@
-const FormInput = ({ label, name, type, defaultValue, size }) => {
+const FormInput = ({ label, name, type, defaultValue, size, id }) => {
   return (
     <div className="form-control ">
       <label className="label capitalize">
@@ -6,6 +6,7 @@ const FormInput = ({ label, name, type, defaultValue, size }) => {
       </label>
 
       <input
+        id={id}
         name={name}
         defaultValue={defaultValue}
         type={type}

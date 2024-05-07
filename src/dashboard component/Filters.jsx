@@ -25,7 +25,7 @@ const Filters = () => {
       <FormSelect
         label="sort by"
         name="sort"
-        list={['z-a', 'a-z', 'latest', 'oldest']}
+        list={['', 'z-a', 'a-z', 'latest', 'oldest']}
         size="select-sm"
         defaultValue={sort}
       />
@@ -40,7 +40,7 @@ const Filters = () => {
       <FormSelect
         label="status"
         name="status"
-        list={['pending', 'paid']}
+        list={['', 'pending', 'paid']}
         size="select-sm"
       />
 

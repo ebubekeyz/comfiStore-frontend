@@ -7,9 +7,9 @@ import { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import FormSelect from '../components/FormSelect';
 import FormCheckbox from '../components/FormCheckbox';
-import AddProductForm from './AddProductForm';
+import EditProductForm from './EditProductForm';
 
-const AddProduct = () => {
+const EditProduct = () => {
   const [files, setFiles] = useState([]);
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -49,7 +49,7 @@ const AddProduct = () => {
       });
       const { src } = resp.data.image;
       const imageSrc = {
-        image: `https://comfi-server-api.onrender.com${src}`,
+        image: `http://localhost:4000${src}`,
       };
       localStorage.setItem('image', JSON.stringify(imageSrc));
     } catch (error) {
@@ -82,11 +82,11 @@ const AddProduct = () => {
       </div>
 
       <div className="col-span-8">
-        <AddProductForm />
+        <EditProductForm />
 
         <aside>{thumbs}</aside>
       </div>
     </section>
   );
 };
-export default AddProduct;
+export default EditProduct;
