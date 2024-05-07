@@ -49,7 +49,7 @@ const AddProduct = () => {
       });
       const { src } = resp.data.image;
       const imageSrc = {
-        image: src,
+        image: `https://comfi-server-api.onrender.com${src}`,
       };
       localStorage.setItem('image', JSON.stringify(imageSrc));
     } catch (error) {

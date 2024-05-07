@@ -1,6 +1,6 @@
 import { Filters, PaginationContainer, ProductsContainer } from '../components';
 import { customFetch } from '../utils';
-const url = '/products';
+const url = '/products?sort=latest';
 
 const allProductsQuery = (queryParams) => {
   const { search, sort, price, category, company, shipping, page } =

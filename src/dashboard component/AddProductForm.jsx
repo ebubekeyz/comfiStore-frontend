@@ -18,8 +18,8 @@ export const action =
           Authorization: `Bearer ${user.token}`,
         },
       });
-
-      toast.success('Post successfully Added');
+      localStorage.removeItem('image');
+      toast.success('Product successfully Added');
       return null;
     } catch (error) {
       console.log(error);
@@ -33,8 +33,8 @@ export const action =
   };
 
 const AddProductForm = () => {
-  const mainImage = JSON.parse(localStorage.getItem('image'));
-  const imgUrl = `https://comfi-server-api.onrender.com${mainImage.image}`;
+  const mainImage = JSON.parse(localStorage.getItem('image')) || '';
+  const imgUrl = mainImage.image === 'undefined' ? '' : mainImage.image;
 
   console.log(imgUrl);
   return (
@@ -77,7 +77,7 @@ const AddProductForm = () => {
 
       <TextAreaInput label="Description" name="description" />
 
-      <SubmitBtn text="post" />
+      <SubmitBtn text="Add Product" />
     </Form>
   );
 };
