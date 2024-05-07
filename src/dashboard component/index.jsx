@@ -7,3 +7,6 @@ export { default as OrdersList } from './OrdersList';
 export { default as UsersList } from './UsersList';
 export { default as NewOrderList } from './NewOrderList';
 export { default as Filters } from './Filters';
+export { default as BreadCrumb } from './BreadCrumb';
+export { default as AddProduct } from './AddProduct';
+export { default as AddProductForm } from './AddProductForm';

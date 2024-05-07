@@ -56,7 +56,6 @@ const NewOrderRequest = () => {
   }
   return (
     <>
-      <SectionTitle text="New Order" />
       <NewOrderList />
       <ComplexPaginationContainer />
     </>

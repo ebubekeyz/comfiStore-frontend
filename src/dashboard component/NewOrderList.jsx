@@ -7,6 +7,7 @@ import { customFetch } from '../utils';
 import { toast } from 'react-toastify';
 import FormInput from '../components/FormInput';
 import { useState } from 'react';
+import BreadCrumb from './BreadCrumb';
 day.extend(advancedFormat);
 
 export const action =
@@ -61,6 +62,12 @@ const NewOrderList = () => {
 
   return (
     <div className="mt-8">
+      <BreadCrumb
+        text1="Home"
+        text2="New Order"
+        url1="/dashboard"
+        url2="/dashboard/newOrder"
+      />
       <h4 className="mb-4 capitalize">Total orders : {orders.length}</h4>
       <div className="overflow-x-auto">
         <table className="table table-zebra">

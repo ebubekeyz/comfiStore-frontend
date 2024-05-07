@@ -41,6 +41,7 @@ import { loader as orderLoader } from './pages/Orders';
 import { loader as paystackLoader } from './pages/Paystack';
 // actions
 import { action as orderAction } from './dashboard component/NewOrderList';
+import { action as addProductAction } from './dashboard component/AddProductForm';
 import { action as paystackAction } from './components/PaystackIntegration';
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
@@ -140,6 +141,7 @@ const router = createBrowserRouter([
         path: '/dashboard/addProducts',
         element: <AddProducts />,
         loader: addProductLoader(store),
+        action: addProductAction(store),
       },
       {
         path: '/dashboard/users',
