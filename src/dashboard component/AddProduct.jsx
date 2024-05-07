@@ -68,23 +68,24 @@ const AddProduct = () => {
   }, [files]);
 
   return (
-    <section className="mt-4 grid gap-10 lg:grid-cols-12">
+    <section className="mt-4 grid gap-8 lg:grid-cols-8">
       <div
         {...getRootProps({ className: 'dropzone' })}
-        className="rounded-lg p-12 grid lg:col-span-4 place-items-center border-2 border-base-300 lg:h-72"
+        className="lg:col-span-4 "
       >
         <input {...getInputProps()} />
 
-        <p className="text-center">
-          Drag 'n' drop some files here, or click to select files
-        </p>
-        <BsCloudUpload className="text-3xl" />
+        <div className="rounded-lg border-2 border-base-300 py-24">
+          <p className="text-center">
+            Drag 'n' drop some files here, or click to select files
+          </p>
+          <BsCloudUpload className="text-3xl text-center mx-auto" />
+        </div>
+        <aside>{thumbs}</aside>
       </div>
 
-      <div className="col-span-8">
+      <div className="lg:col-span-4 lg:pl-4">
         <AddProductForm />
-
-        <aside>{thumbs}</aside>
       </div>
     </section>
   );
