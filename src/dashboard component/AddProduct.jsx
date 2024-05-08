@@ -78,7 +78,7 @@ const AddProduct = () => {
         <div className="card rounded-lg bg-base-200 py-24">
           <div className="card-body">
             <p className="text-center">
-              Drag and drop some files here, or click to select files
+              Drag and drop file here, or click to select file
             </p>
             <BsCloudUpload className="text-3xl text-center mt-4 mx-auto text-primary animate-bounce" />
           </div>

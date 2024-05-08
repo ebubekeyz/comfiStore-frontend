@@ -163,7 +163,7 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/products',
         element: <ModifyProducts />,
-        loader: modifyProductsLoader(queryClient),
+        loader: modifyProductsLoader(store, queryClient),
       },
       {
         path: '/dashboard/editProduct/:id',

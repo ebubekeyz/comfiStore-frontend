@@ -1,7 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
 import { formatPrice, customFetch, generateAmountOptions } from '../utils';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../features/cart/cartSlice';
 
@@ -25,7 +25,15 @@ export const loader =
 const SingleProduct = () => {
   const { product } = useLoaderData();
 
+  let value;
+
   const { image, title, price, description, colors, company } = product;
+
+  value = description;
+
+  useEffect(() => {
+    document.getElementById('desc').innerHTML = value;
+  }, []);
   const dollarsAmount = formatPrice(price);
   const [productColor, setProductColor] = useState(colors[0]);
   const [amount, setAmount] = useState(1);
@@ -98,7 +106,9 @@ const SingleProduct = () => {
           <h4 className="text-xl text-neutral-content font-bold mt-2">
             {company}
           </h4>
-          <p className="mt-3 text-xl">{dollarsAmount}</p>
+          <p className="mt-3 text-xl" id="desc">
+            {value}
+          </p>
           <p className="mt-6 leading-8">{description}</p>
           {/* COLORS */}
           <div className="mt-6">

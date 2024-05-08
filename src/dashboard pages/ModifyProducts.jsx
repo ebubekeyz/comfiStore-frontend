@@ -1,9 +1,11 @@
+import { redirect } from 'react-router-dom';
 import {
   Filters,
   ProductsContainer,
   PaginationContainer,
 } from '../dashboard component';
 import { customFetch } from '../utils';
+import { toast } from 'react-toastify';
 const url = '/products?sort=latest';
 
 const allProductsQuery = (queryParams) => {
@@ -28,9 +30,14 @@ const allProductsQuery = (queryParams) => {
 };
 
 export const loader =
-  (queryClient) =>
+  (store, queryClient) =>
   async ({ request }) => {
-    console.log(request);
+    const user = store.getState().userState.user;
+
+    if ((!user && user.role !== 'admin') || user.role !== 'owner') {
+      toast.warn('You must be logged in to view this page');
+      return redirect('/login');
+    }
     // const params = new URL(request.url).searchParams;
     // const search = params.get('search');
     // console.log(search);
