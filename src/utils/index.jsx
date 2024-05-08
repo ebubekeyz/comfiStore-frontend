@@ -3,7 +3,7 @@ import axios from 'axios';
 let productionUrl =
   process.env.NODE_ENV !== 'production'
     ? 'http://localhost:4000/api'
-    : 'https://comfi-server.onrender.com/api';
+    : 'https://comfi-server-api.onrender.com/api';
 
 export const customFetch = axios.create({
   baseURL: productionUrl,
