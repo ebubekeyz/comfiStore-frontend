@@ -1,6 +1,5 @@
 {
   "name": "comfy-store",
-  "proxy": "https://comfi-server-api.onrender.com",
   "private": true,
   "version": "0.0.0",
   "type": "module",

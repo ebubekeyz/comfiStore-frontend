@@ -75,11 +75,13 @@ const EditProduct = () => {
       >
         <input {...getInputProps()} />
 
-        <div className="rounded-lg border-2 border-base-300 py-24">
-          <p className="text-center">
-            Drag 'n' drop some files here, or click to select files
-          </p>
-          <BsCloudUpload className="text-3xl text-center mx-auto" />
+        <div className="card rounded-lg bg-base-200 py-24">
+          <div className="card-body">
+            <p className="text-center">
+              Drag and drop some files here, or click to select files
+            </p>
+            <BsCloudUpload className="text-3xl text-center mx-auto mt-4 text-primary animate-bounce" />
+          </div>
         </div>
 
         <aside>{thumbs}</aside>

@@ -14,7 +14,7 @@ export const action = async ({ request }) => {
   try {
     const paystack = new PaystackPop();
     paystack.newTransaction({
-      key: 'pk_live_6962c58482c759607e1c03b3e09be799f4484874',
+      key: import.meta.env.VITE_SPACE_KEY,
       amount: amount * 100,
       email: email,
       name: name,
