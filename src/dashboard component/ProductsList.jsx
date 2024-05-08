@@ -32,7 +32,8 @@ const ProductsList = () => {
       });
       localStorage.removeItem('productId');
       toast.success('Product successfully deleted');
-      nav('/dashboard/products');
+      //   nav('/dashboard/products');
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -42,6 +43,7 @@ const ProductsList = () => {
     <div className="mt-12 grid gap-y-8">
       {products.map((product) => {
         const { title, company, price, image } = product;
+
         return (
           <div className="p-8 rounded-lg flex flex-col sm:flex-row gap-y-4 flex-wrap bg-base-100 shadow-xl hover:shadow-2xl duration-200 group">
             <img
