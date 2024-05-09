@@ -14,15 +14,18 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.32.6",
     "@tanstack/react-query-devtools": "^4.32.6",
+    "@tinymce/tinymce-react": "^5.0.1",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
+    "fs-extra": "^11.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-icons": "^4.10.1",
     "react-redux": "^8.1.2",
     "react-router-dom": "^6.14.2",
-    "react-toastify": "^9.1.3"
+    "react-toastify": "^9.1.3",
+    "tinymce": "^7.0.1"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.12",

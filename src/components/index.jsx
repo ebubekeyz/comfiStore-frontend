@@ -19,3 +19,4 @@ export { default as OrdersList } from './OrdersList';
 export { default as ComplexPaginationContainer } from './ComplexPaginationContainer';
 export { default as BreadCrumb } from './BreadCrumb';
 export { default as TextAreaInput } from './TextAreaInput';
+export { default as TinyMCE } from './TinyMCE';

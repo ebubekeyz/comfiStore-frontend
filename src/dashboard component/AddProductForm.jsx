@@ -1,5 +1,5 @@
 import { Form } from 'react-router-dom';
-import { FormInput, SubmitBtn, TextAreaInput } from '../components';
+import { FormInput, SubmitBtn, TextAreaInput, TinyMCE } from '../components';
 import FormCheckbox from '../components/FormCheckbox';
 import FormSelect from '../components/FormSelect';
 import { customFetch } from '../utils';
@@ -10,8 +10,39 @@ export const action =
   async ({ request }) => {
     const user = store.getState().userState.user;
     const formData = await request.formData();
-    const data = Object.fromEntries(formData);
-    console.log(data);
+    const {
+      title,
+      color1,
+      color2,
+      color3,
+      color4,
+      company,
+      featured,
+      shipping,
+      category,
+      price,
+      colors,
+      image,
+    } = Object.fromEntries(formData);
+
+    const desc = JSON.parse(localStorage.getItem('desc'));
+    const description = desc.content;
+
+    const data = {
+      title: title,
+      company: company,
+      featured: featured,
+      shipping: shipping,
+      category: category,
+      price: price,
+      color1: color1,
+      color2: color2,
+      color3: color3,
+      color4: color4,
+      image: image,
+      description: description,
+    };
+
     try {
       const response = await customFetch.post('/products', data, {
         headers: {
@@ -19,6 +50,7 @@ export const action =
         },
       });
       localStorage.removeItem('image');
+      localStorage.removeItem('desc');
       toast.success('Product successfully Added');
       return null;
     } catch (error) {
@@ -36,7 +68,12 @@ const AddProductForm = () => {
   const mainImage = JSON.parse(localStorage.getItem('image')) || '';
   const imgUrl = mainImage.image === 'undefined' ? '' : mainImage.image;
 
-  console.log(imgUrl);
+  const handleSubmit = (e) => {
+    const tiny = {
+      content: e.target.getContent(),
+    };
+    localStorage.setItem('desc', JSON.stringify(tiny));
+  };
   return (
     <Form method="post">
       <FormInput type="text" label="Title" name="title" size="input-md" />
@@ -73,9 +110,17 @@ const AddProductForm = () => {
         defaultValue={imgUrl || ''}
       />
 
-      <FormInput type="color" label="color" name="colors" size="input-sm" />
+      <div className="flex gap-x-2 ">
+        <FormInput type="color" name="color1" size="input-sm" />
 
-      <TextAreaInput label="Description" name="description" />
+        <FormInput type="color" name="color2" size="input-sm" />
+
+        <FormInput type="color" name="color3" size="input-sm" />
+
+        <FormInput type="color" name="color4" size="input-sm" />
+      </div>
+      {/* <TextAreaInput label="Description" name="description" /> */}
+      <TinyMCE onChange={handleSubmit} />
 
       <SubmitBtn text="Add Product" />
     </Form>

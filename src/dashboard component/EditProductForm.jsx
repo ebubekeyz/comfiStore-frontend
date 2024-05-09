@@ -1,25 +1,40 @@
 import { Form, useLoaderData } from 'react-router-dom';
-import { FormInput, SubmitBtn, TextAreaInput } from '../components';
+import { FormInput, SubmitBtn, TextAreaInput, TinyMCE } from '../components';
 import FormCheckbox from '../components/FormCheckbox';
 import FormSelect from '../components/FormSelect';
 import { customFetch } from '../utils';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 
+let content;
+
 export const action =
   (store) =>
   async ({ params, request }) => {
     const user = store.getState().userState.user;
     const formData = await request.formData();
-    const data = Object.fromEntries(formData);
+    let data2 = Object.fromEntries(formData);
 
+    const mainDesc2 = JSON.parse(localStorage.getItem('description'));
+
+    let description;
+
+    const desc = JSON.parse(localStorage.getItem('desc'));
+    description = desc ? desc.content : mainDesc2.mainDesc;
+
+    data2 = { ...data2, description: description };
     try {
-      const response = await customFetch.patch(`/products/${params.id}`, data, {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
+      const response = await customFetch.patch(
+        `/products/${params.id}`,
+        data2,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
       localStorage.removeItem('image');
+      localStorage.removeItem('desc');
       toast.success('Product successfully Edited');
       return null;
     } catch (error) {
@@ -42,13 +57,28 @@ const EditProductForm = () => {
     const mainId = JSON.parse(localStorage.getItem('editId'));
     const resp = await customFetch.get(`/products/${mainId.editId}`);
     setData(resp.data.attributes);
+
+    const mainDesc = {
+      mainDesc: resp.data.attributes.description,
+    };
+    localStorage.setItem('description', JSON.stringify(mainDesc));
+  };
+  console.log(data.title, data.price, data.shipping, data.image);
+  const handleSubmit = (e) => {
+    const tiny = {
+      content: e.target.getContent() ? e.target.getContent() : data.description,
+    };
+    localStorage.setItem('desc', JSON.stringify(tiny));
   };
 
   useEffect(() => {
     getSingleProduct();
-    document.getElementById('textArea').defaultValue = data.description || '';
+    // document.getElementById('textArea').defaultValue = data.description || '';
 
-    document.getElementById('color').value = data.colors;
+    document.getElementById('color1').value = data.color1;
+    document.getElementById('color2').value = data.color2;
+    document.getElementById('color3').value = data.color3;
+    document.getElementById('color4').value = data.color4;
   }, [getSingleProduct]);
 
   return (
@@ -58,13 +88,20 @@ const EditProductForm = () => {
         label="Title"
         name="title"
         size="input-md"
-        defaultValue={data.title || ''}
+        defaultValue={data.title}
       />
-      <FormSelect
+      {/* <FormSelect
         label="company"
         name="company"
-        list={[`${data.company || ''}`, 'Italian', 'Adidas']}
+        list={[`${data.company}`, 'Italian', 'Adidas']}
         size="select-md"
+      /> */}
+      <FormInput
+        type="text"
+        label="company"
+        name="company"
+        size="input-md"
+        defaultValue={data.company}
       />
 
       <FormCheckbox
@@ -74,14 +111,21 @@ const EditProductForm = () => {
         defaultValue={data.shipping}
       />
 
-      <FormSelect
+      {/* <FormSelect
         label="featured"
         name="featured"
-        list={[`${data.featured || ''}`, 'true', 'false']}
+        list={[`${data.featured}`, 'true', 'false']}
         size="select-md"
+      /> */}
+      <FormInput
+        type="text"
+        label="featured"
+        name="featured"
+        size="input-md"
+        defaultValue={data.featured}
       />
 
-      <FormSelect
+      {/* <FormSelect
         label="category"
         name="category"
         list={[
@@ -90,6 +134,13 @@ const EditProductForm = () => {
           'bridal wedding dress',
         ]}
         size="select-md"
+      /> */}
+      <FormInput
+        type="text"
+        label="category"
+        name="category"
+        size="input-md"
+        defaultValue={data.category}
       />
 
       <FormInput
@@ -97,7 +148,7 @@ const EditProductForm = () => {
         label="Price"
         name="price"
         size="input-md"
-        defaultValue={data.price || ''}
+        defaultValue={data.price}
       />
 
       <FormInput
@@ -108,21 +159,45 @@ const EditProductForm = () => {
         defaultValue={imgUrl || '' || data.image}
       />
 
-      <FormInput
-        type="color"
-        label="color"
-        name="colors"
-        size="input-sm"
-        id="color"
-      />
+      <div className="flex gap-2">
+        <FormInput
+          type="color"
+          name="color1"
+          size="input-sm"
+          id="color1"
+          value={data.color1}
+        />
+        <FormInput
+          type="color"
+          name="color2"
+          size="input-sm"
+          id="color2"
+          value={data.color2}
+        />
+        <FormInput
+          type="color"
+          name="color3"
+          size="input-sm"
+          id="color3"
+          value={data.color3}
+        />
+        <FormInput
+          type="color"
+          name="color4"
+          size="input-sm"
+          id="color4"
+          value={data.color4}
+        />
+      </div>
 
-      <TextAreaInput
+      {/* <TextAreaInput
         label="Description"
         id="textArea"
         name="description"
         text={data.description || ''}
-      />
+      /> */}
 
+      <TinyMCE value={data.description} onChange={handleSubmit} />
       <SubmitBtn text="Edit Product" />
     </Form>
   );

@@ -25,9 +25,9 @@ export const loader =
 const SingleProduct = () => {
   const { product } = useLoaderData();
 
-  let value;
-
   const { image, title, price, description, colors, company } = product;
+
+  let value;
 
   value = description;
 
@@ -106,10 +106,10 @@ const SingleProduct = () => {
           <h4 className="text-xl text-neutral-content font-bold mt-2">
             {company}
           </h4>
-          <p className="mt-3 text-xl" id="desc">
+          <p className="mt-3 text-xl">{dollarsAmount}</p>
+          <p className="mt-6 leading-8" id="desc">
             {value}
           </p>
-          <p className="mt-6 leading-8">{description}</p>
           {/* COLORS */}
           <div className="mt-6">
             <h4 className="text-md font-medium tracking-wider capitalize">
