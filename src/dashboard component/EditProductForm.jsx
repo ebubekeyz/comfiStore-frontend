@@ -5,6 +5,7 @@ import FormSelect from '../components/FormSelect';
 import { customFetch } from '../utils';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
+import { data } from 'autoprefixer';
 
 let content;
 
@@ -17,12 +18,26 @@ export const action =
 
     const mainDesc2 = JSON.parse(localStorage.getItem('description'));
 
+    const mainShipping = JSON.parse(localStorage.getItem('shipping'));
+
     let description;
+    let shipping;
+
+    let ship = JSON.parse(localStorage.getItem('checkbox'));
+    if (ship && ship.check === false) {
+      ship = 'off';
+    } else if (ship && ship.check === true) {
+      ship = 'on';
+    } else {
+      ship = mainShipping.mainShip;
+    }
+    shipping = ship;
 
     const desc = JSON.parse(localStorage.getItem('desc'));
     description = desc ? desc.content : mainDesc2.mainDesc;
 
-    data2 = { ...data2, description: description };
+    data2 = { ...data2, description: description, shipping: shipping };
+    console.log(data2);
     try {
       const response = await customFetch.patch(
         `/products/${params.id}`,
@@ -35,6 +50,8 @@ export const action =
       );
       localStorage.removeItem('image');
       localStorage.removeItem('desc');
+      localStorage.removeItem('shipping');
+      localStorage.removeItem('checkbox');
       toast.success('Product successfully Edited');
       return null;
     } catch (error) {
@@ -62,13 +79,24 @@ const EditProductForm = () => {
       mainDesc: resp.data.attributes.description,
     };
     localStorage.setItem('description', JSON.stringify(mainDesc));
+
+    const mainShip = {
+      mainShip: resp.data.attributes.shipping,
+    };
+    localStorage.setItem('shipping', JSON.stringify(mainShip));
   };
-  console.log(data.title, data.price, data.shipping, data.image);
+
   const handleSubmit = (e) => {
     const tiny = {
       content: e.target.getContent() ? e.target.getContent() : data.description,
     };
     localStorage.setItem('desc', JSON.stringify(tiny));
+  };
+  const handleSubmit2 = (e) => {
+    const check = {
+      check: e.target.checked,
+    };
+    localStorage.setItem('checkbox', JSON.stringify(check));
   };
 
   useEffect(() => {
@@ -95,6 +123,7 @@ const EditProductForm = () => {
         name="company"
         list={[`${data.company}`, 'Italian', 'Adidas']}
         size="select-md"
+          defaultValue={data.company}
       /> */}
       <FormInput
         type="text"
@@ -107,8 +136,10 @@ const EditProductForm = () => {
       <FormCheckbox
         name="shipping"
         label="free shipping"
+        id="checkbox"
         size="checkbox-md"
         defaultValue={data.shipping}
+        onChange={handleSubmit2}
       />
 
       {/* <FormSelect
