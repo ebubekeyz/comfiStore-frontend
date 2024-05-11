@@ -14,3 +14,6 @@ export { default as PaginationContainer } from './PaginationContainer';
 export { default as ProductsContainer } from './ProductsContainer';
 export { default as EditProduct } from './EditProduct';
 export { default as EditProductForm } from './EditProductForm';
+export { default as AreaCharts } from './AreaCharts';
+export { default as BarCharts } from './BarCharts';
+export { default as LineCharts } from './LineCharts';
