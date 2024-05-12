@@ -48,10 +48,15 @@ const AddProduct = () => {
         },
       });
       const { src } = resp.data.image;
+      let originUrl =
+        process.env.NODE_ENV !== 'production'
+          ? 'http://localhost:4000'
+          : 'https://comfi-server-api.onrender.com';
       const imageSrc = {
-        image: src,
+        image: `${originUrl}${src}`,
       };
       localStorage.setItem('image', JSON.stringify(imageSrc));
+      // window.location.reload();
     } catch (error) {
       console.log(error);
     }

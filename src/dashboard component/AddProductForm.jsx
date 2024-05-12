@@ -26,7 +26,7 @@ export const action =
     } = Object.fromEntries(formData);
 
     const desc = JSON.parse(localStorage.getItem('desc'));
-    const description = desc.content;
+    const description = !desc.content ? '' : desc.content;
 
     const data = {
       title: title,
@@ -70,7 +70,7 @@ const AddProductForm = () => {
 
   const handleSubmit = (e) => {
     const tiny = {
-      content: e.target.getContent(),
+      content: e.target.getContent() ? e.target.getContent() : '',
     };
     localStorage.setItem('desc', JSON.stringify(tiny));
   };
@@ -112,12 +112,6 @@ const AddProductForm = () => {
 
       <div className="flex gap-x-2 ">
         <FormInput type="color" name="color1" size="input-sm" />
-
-        <FormInput type="color" name="color2" size="input-sm" />
-
-        <FormInput type="color" name="color3" size="input-sm" />
-
-        <FormInput type="color" name="color4" size="input-sm" />
       </div>
       {/* <TextAreaInput label="Description" name="description" /> */}
       <TinyMCE onChange={handleSubmit} />

@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { data } from 'autoprefixer';
 
 let content;
+const mainShipping = JSON.parse(localStorage.getItem('shipping'));
 
 export const action =
   (store) =>
@@ -17,8 +18,6 @@ export const action =
     let data2 = Object.fromEntries(formData);
 
     const mainDesc2 = JSON.parse(localStorage.getItem('description'));
-
-    const mainShipping = JSON.parse(localStorage.getItem('shipping'));
 
     let description;
     let shipping;
@@ -86,6 +85,8 @@ const EditProductForm = () => {
     localStorage.setItem('shipping', JSON.stringify(mainShip));
   };
 
+  const [check, setCheck] = useState(mainShipping.mainShip);
+  console.log(check);
   const handleSubmit = (e) => {
     const tiny = {
       content: e.target.getContent() ? e.target.getContent() : data.description,
@@ -97,16 +98,31 @@ const EditProductForm = () => {
       check: e.target.checked,
     };
     localStorage.setItem('checkbox', JSON.stringify(check));
+    let ship;
+    if (e.target.checked === false) {
+      ship = 'off';
+    } else if (e.target.checked === true) {
+      ship = 'on';
+    }
+    setCheck(ship);
+  };
+
+  const getColor = JSON.parse(localStorage.getItem('color'));
+
+  const [color, setColor] = useState(getColor.color);
+
+  const handleColor = (e) => {
+    console.log(e.target.value);
+    const colorObj = {
+      color: e.target.value ? e.target.value : data.color1,
+    };
+    localStorage.setItem('color', JSON.stringify(colorObj));
+    setColor(e.target.value);
   };
 
   useEffect(() => {
     getSingleProduct();
     // document.getElementById('textArea').defaultValue = data.description || '';
-
-    document.getElementById('color1').value = data.color1;
-    document.getElementById('color2').value = data.color2;
-    document.getElementById('color3').value = data.color3;
-    document.getElementById('color4').value = data.color4;
   }, [getSingleProduct]);
 
   return (
@@ -133,14 +149,17 @@ const EditProductForm = () => {
         defaultValue={data.company}
       />
 
-      <FormCheckbox
-        name="shipping"
-        label="free shipping"
-        id="checkbox"
-        size="checkbox-md"
-        defaultValue={data.shipping}
-        onChange={handleSubmit2}
-      />
+      <div className="flex items-end">
+        <FormCheckbox
+          name="shipping"
+          label="free shipping"
+          id="checkbox"
+          size="checkbox-md"
+          onChange={handleSubmit2}
+        />
+
+        <div className="text-md text-primary italic">{check}</div>
+      </div>
 
       {/* <FormSelect
         label="featured"
@@ -190,35 +209,20 @@ const EditProductForm = () => {
         defaultValue={imgUrl || '' || data.image}
       />
 
-      <div className="flex gap-2">
+      <div className="flex items-end gap-5">
         <FormInput
           type="color"
           name="color1"
           size="input-sm"
           id="color1"
-          value={data.color1}
+          onChange={handleColor}
         />
-        <FormInput
-          type="color"
-          name="color2"
-          size="input-sm"
-          id="color2"
-          value={data.color2}
-        />
-        <FormInput
-          type="color"
-          name="color3"
-          size="input-sm"
-          id="color3"
-          value={data.color3}
-        />
-        <FormInput
-          type="color"
-          name="color4"
-          size="input-sm"
-          id="color4"
-          value={data.color4}
-        />
+
+        <button
+          type="button"
+          className="badge w-6 h-6 mb-1"
+          style={{ background: color }}
+        ></button>
       </div>
 
       {/* <TextAreaInput
